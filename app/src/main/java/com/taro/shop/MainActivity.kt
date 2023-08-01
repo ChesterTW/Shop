@@ -4,6 +4,9 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import com.google.firebase.auth.FirebaseAuth
@@ -63,8 +66,19 @@ class MainActivity : AppCompatActivity() {
             })
 
         /// Spinner
+        val colors = arrayOf("Red", "Green", "Blue")
+        val adapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, colors)
+        //adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line)
+        binding.spinner.adapter = adapter
+        binding.spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, position: Int, p3: Long) {
+                Log.d("MainActivity", "onItemSelected: ${colors[position]}")
+            }
 
-
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+                TODO("Not yet implemented")
+            }
+        }
 
 
     }
