@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "917080984973",
+    "firebase_url": "https://shop-20637-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "shop-20637",
+    "storage_bucket": "shop-20637.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:917080984973:android:86ca1e9dfaab542ea181c4",
+        "android_client_info": {
+          "package_name": "com.taro.shop"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "917080984973-7lbtrvdptc89rstvkum7l6ip29nd4ck2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB6LSEJtcBYs-TL-VT4uuI5LGrjiA8sAg0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "917080984973-7lbtrvdptc89rstvkum7l6ip29nd4ck2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
