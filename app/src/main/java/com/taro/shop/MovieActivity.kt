@@ -12,8 +12,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.taro.shop.databinding.ActivityMovieBinding
 
-import com.taro.shop.databinding.ActivityParkingBinding
-import com.taro.shop.databinding.RowFunctionBinding
 import com.taro.shop.databinding.RowMovieBinding
 import io.reactivex.Observable
 
@@ -24,7 +22,6 @@ import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
-import kotlin.math.log
 
 class MovieActivity : AppCompatActivity() {
     private val TAG = MovieActivity::class.java.simpleName
@@ -77,7 +74,7 @@ class MovieActivity : AppCompatActivity() {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
-                it->it.forEach { Log.d(TAG, "${it.Title}\t${it.imdbRating}") }
+                it->it.forEach { Log.d(TAG, "${it.Title}\t${it.imdbRating}\t${it.Images}") }
                 movies = it
             },{
                 Log.d(TAG, "onCreate: $it")

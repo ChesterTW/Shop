@@ -123,6 +123,7 @@ class MainActivity : AppCompatActivity() {
             when(position){
                 1-> startActivity(Intent(this@MainActivity ,ContactActivity::class.java))
                 2-> startActivity(Intent(this@MainActivity ,ParkingActivity::class.java))
+                4-> startActivity(Intent(this@MainActivity ,NewsActivity::class.java))
                 5-> startActivity(Intent(this@MainActivity ,MovieActivity::class.java))
             }
         }
