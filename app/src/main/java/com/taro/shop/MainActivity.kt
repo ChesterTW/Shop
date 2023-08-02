@@ -4,22 +4,29 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.taro.shop.MainActivity.FunctionHolder
 import com.taro.shop.databinding.ActivityMainBinding
+import com.taro.shop.databinding.RowFunctionBinding
 
 class MainActivity : AppCompatActivity() {
+    private val TAG = MainActivity::class.java.simpleName
     lateinit var binding: ActivityMainBinding
     private val auth = FirebaseAuth.getInstance()
     private var signup = false
+    val functions = listOf<String>("Camera", "Invite friend", "Parking", "Downloading coupons", "News", "Movies")
 
     // Step 1: Create launcher, Contract, When Finish to Do
     private val launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
@@ -81,7 +88,59 @@ class MainActivity : AppCompatActivity() {
         }
 
 
+        /// RecyclerView
+
+        binding.recycler.layoutManager = LinearLayoutManager(this)
+        binding.recycler.setHasFixedSize(true)
+        binding.recycler.adapter = FunctionAdapter()
+
+
     }
+
+    inner class FunctionAdapter() : RecyclerView.Adapter<FunctionHolder>() {
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FunctionHolder {
+/*            val inflater = LayoutInflater.from(parent.context)
+            val binding = RowFunctionBinding.inflate(inflater,parent,false)
+            return FunctionHolder(binding)*/
+
+            val view = LayoutInflater.from(parent.context).inflate(R.layout.row_function,parent,false)
+            return FunctionHolder(view)
+        }
+
+        override fun getItemCount(): Int {
+            return functions.size
+        }
+
+        override fun onBindViewHolder(holder: FunctionHolder, position: Int) {
+            holder.nameText.text = functions[position]
+            holder.itemView.setOnClickListener(View.OnClickListener { view ->
+                functionClicked(holder, position)
+            })
+        }
+
+        private fun functionClicked(holder: FunctionHolder, position: Int) {
+            Log.d(TAG, "functionClicked: $position")
+            when(position){
+                1-> startActivity(Intent(this@MainActivity ,ContactActivity::class.java))
+                2-> startActivity(Intent(this@MainActivity ,ParkingActivity::class.java))
+                5-> startActivity(Intent(this@MainActivity ,MovieActivity::class.java))
+            }
+        }
+
+    }
+
+/*    class FunctionHolder(private val binding: RowFunctionBinding) : RecyclerView.ViewHolder(binding.root){
+
+        var nameText = binding.name
+    }*/
+
+    class FunctionHolder(view: View) : RecyclerView.ViewHolder(view){
+        private val binding = RowFunctionBinding.bind(view)
+
+        val nameText = binding.name
+    }
+
+
 
     private fun authChanged(auth: FirebaseAuth) {
         if(auth.currentUser == null){
